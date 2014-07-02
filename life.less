@@ -1,0 +1,30 @@
+@grid-size : 900px;
+@cell-height : 10px;
+@cell-width : 10px;
+@color-alive : #328A2E;
+@color-select : #8DCF8A;
+
+#lifegrid {
+  padding : 2px;
+  margin: 0px; 
+  width : @grid-size;
+  height : @grid-size;
+  border-style : solid;
+  border-width : 1px;
+}
+
+.lifecell {
+  display : block;
+  float : left;
+  padding : 0px;
+  margin : 0px;
+  height : @cell-height;
+  width  : @cell-width;
+  border-style : solid;
+  border-width : 1px;
+  &:hover { background-color : @color-select; }
+}
+
+.alive {
+  background-color: @color-alive;
+}
