@@ -71,7 +71,7 @@ function countNeighbors(id) {
  //@todo: this should be a function
   $.each(neighborsInline, function (index, value) {
     var row = Math.floor(id / numCells);
-    if (value > 0 && value <= lastCell  && row  == Math.floor(value/numCells) && $('#'+value).hasClass('alive')) {
+    if (value >= 0 && value <= lastCell  && row  == Math.floor(value/numCells) && $('#'+value).hasClass('alive')) {
       neighbors.push(value);
       count += 1;
     }
@@ -80,7 +80,7 @@ function countNeighbors(id) {
  //@todo: this should be a function
  $.each(neighborsAbove, function (index, value) {
     var row = Math.floor(id / numCells)-1;
-    if (row >= 0 && value > 0 && value <= lastCell && row  == Math.floor(value/numCells) && $('#'+value).hasClass('alive')) {
+    if (row >= 0 && value >= 0 && value <= lastCell && row  == Math.floor(value/numCells) && $('#'+value).hasClass('alive')) {
       neighbors.push(value);
       count += 1;
     }
@@ -89,7 +89,7 @@ function countNeighbors(id) {
  $.each(neighborsAbove, function (index, value) {
     var row = Math.floor(id/numCells)+1;
 
-    if (row <= numRows  && value > 0 && value <= lastCell && row  == Math.floor(value/numCells) && $('#'+value).hasClass('alive')) {
+    if (row <= numRows  && value >= 0 && value <= lastCell && row  == Math.floor(value/numCells) && $('#'+value).hasClass('alive')) {
       neighbors.push(value);
       count += 1;
     }
