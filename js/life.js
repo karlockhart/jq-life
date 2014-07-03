@@ -32,26 +32,38 @@ $(document).ready(function () {
 	});
 });
 function  iterate(numCells) {
-	var  i = 0;
+
 	var  born = [];
 	var  died = [];
-	  $('.lifecell').each(function  () {
-		i++;
-		var  numNeighbors = countNeighbors($(this).attr('id'));
-		    if ($(this).hasClass('alive')  &&  (numNeighbors < 2  ||  numNeighbors > 3)) {
-			console.log('dying ' + $(this).attr('id'));
-			died.push($(this).attr('id'));
+	
+	var pointsOfInterest = [];
+	
+	  $('.alive').each(function () {
+	    var points = getNeighbors($(this).attr('id'));
+	    points.push($(this).attr('id'));
+	    
+	    $.each(points, function(index, value) {
+	    	if($.inArray(value, pointsOfInterest) === -1) pointsOfInterest.push(value);
+	    });
+	    
+	  });
+	
+	  $(pointsOfInterest).each(function  (index,value) {
+		var  numNeighbors = countNeighbors(value);
+		    if ($('#'+value).hasClass('alive')  &&  (numNeighbors < 2  ||  numNeighbors > 3)) {
+			console.log('dying ' + value);
+			died.push(value);
 			
 		}
-		else if(!$(this).hasClass('alive')  &&  numNeighbors == 3) {
-			console.log('born ' + $(this).attr('id'));
-			born.push($(this).attr('id'));
+		else if(!$('#'+value).hasClass('alive')  &&  numNeighbors == 3) {
+			console.log('born ' + value);
+			born.push(value);
 			    
 		}
 		
 	});
 	    console.log(born + ':born,died:' + died);
-	        $.each(born, function  (index, value) {
+	    $.each(born, function  (index, value) {
 		$('#'+value).addClass('alive');
 		    
 	});
@@ -100,6 +112,7 @@ function  countNeighbors(id) {
 	}
 	return neighbors.length;
 }
+
 function  getNeighbors(id) {
 	id = parseInt(id);
 	var  neighborsInline = [(id-1), (id+1)];
